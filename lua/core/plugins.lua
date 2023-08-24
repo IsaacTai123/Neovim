@@ -84,6 +84,9 @@ return require('packer').startup(function(use)
     dependencies = { "nvim-lua/plenary.nvim" },
   }
 
+  -- Git Conflict
+  use { 'akinsho/git-conflict.nvim', tag = "*" }
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then

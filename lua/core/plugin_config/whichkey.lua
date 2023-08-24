@@ -4,12 +4,16 @@ require("which-key").setup {
   -- your configuration comes here
   -- or leave it empty to use the default settings
   -- refer to the configuration section below
-
 }
 
 local wk = require("which-key")
 
 wk.register({
+  w = {
+    name = "Sample",
+    f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
+    b = { function() print("bar") end, "Foobar" } -- you can also pass functions!
+  },
   f = {
     name = "Floaterm", -- optional group name
     c = { "<cmd>FloatermNew<cr>", "Create new floaterm"},
@@ -43,11 +47,6 @@ wk.register({
     D = { "<cmd>Telescope lsp_diagnostics<cr>", "Lsp diagnostics" },
     P = { "<cmd>Telescope lsp_implementations<cr>", "Lsp implementation" },
     T = { "<cmd>Telescope lsp_type_definitions<cr>", "Lsp type definitions" },
-  },
-  c = {
-    name = "Sample",
-    f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
-    b = { function() print("bar") end, "Foobar" } -- you can also pass functions!
   },
   s = {
     name = "System",
@@ -99,7 +98,7 @@ wk.register({
     -- F = { "<cmd>LspToggleAutoFormat<cr>", "Toggle Autoformat" },
     I = { "<cmd>LspInfo<cr>", "Info" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
-    s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+    D = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
   },
   g = {
     name = "Gitgutter",
@@ -114,6 +113,18 @@ wk.register({
     U = { "<cmd>GitGutterUndoHunk<cr>", "Undo Hunk" },
     P = { "<cmd>GitGutterPreviewHunk<cr>", "Preview Hunk" },
     s = { "<cmd>GitGutterAll<cr>", "Update signs across all buffer" },
+  },
+  c = {
+    name = "Conflict",
+    a = { "<cmd>GitConflictChooseBoth<cr>", "choose both" },
+    b = { "<cmd>GitConflictChooseBase<cr>", "choose base" },
+    x = { "<cmd>GitConflictChooseNone<cr>", "choose none" },
+    o = { "<cmd>GitConflictChooseOurs<cr>", "choose ours" },
+    t = { "<cmd>GitConflictChooseTheirs<cr>", "choose Theirs" },
+    n = { "<cmd>GitConflictNextConflict<cr>", "next conflict" },
+    p = { "<cmd>GitConflictPrevConflict<cr>", "prev conflict" },
+    l = { "<cmd>GitConflictListQf<cr>", "list conflict" },
+    r = { "<cmd>GitConflictRefresh<cr>", "conflict refresh" },
   },
   o = {
     name = "Others",
