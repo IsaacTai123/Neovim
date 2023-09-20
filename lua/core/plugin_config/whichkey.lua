@@ -22,7 +22,7 @@ wk.register({
     t = { "<cmd>FloatermToggle<cr>", "Toggle floaterm window"},
     k = { "<cmd>FloatermKill<cr>", "Kill floaterm window"},
     b = { "<cmd>FloatermNew! --height=0.2 --width=0.98 --wintype=normal --name=terminal --position=bottom --autoclose=1 cd %:p:h<cr>", "Create button terminal"},
-    g = { "<cmd>FloatermNew! --height=0.85 --width=0.98 --wintype=normal --name=lazygit --position=center --autoclose=1 lazygit<cr>", "Create button terminal"},
+    g = { "<cmd>FloatermNew! --height=0.95 --width=0.98 --wintype=float --name=lazygit --position=center --autoclose=1 lazygit<cr>", "lazygit"},
   },
   t = {
     name = "Telescope",
@@ -47,6 +47,7 @@ wk.register({
     D = { "<cmd>Telescope lsp_diagnostics<cr>", "Lsp diagnostics" },
     P = { "<cmd>Telescope lsp_implementations<cr>", "Lsp implementation" },
     T = { "<cmd>Telescope lsp_type_definitions<cr>", "Lsp type definitions" },
+    t = { "<cmd>TodoTelescope<cr>", "Todo Search" },
   },
   s = {
     name = "System",
@@ -70,8 +71,8 @@ wk.register({
     g = { "<cmd>Lspsaga goto_definition<cr>", "Goto definition"},
     h = { "<cmd>Lspsaga hover_doc<cr>", "Hover doc"},
     H = { "<cmd>Lspsaga hover_doc ++keep<cr>", "Hover doc keep"},
-    T = { "<cmd>Lspsaga peek_type_definition<cr>", "Peek type definition"},
-    t = { "<cmd>Lspsaga goto_type_definition<cr>", "Goto type definition"},
+    t = { "<cmd>Lspsaga peek_type_definition<cr>", "Peek type definition"},
+    T = { "<cmd>Lspsaga goto_type_definition<cr>", "Goto type definition"},
     R = { "<cmd>Lspsaga project_replace<cr>", "Project replace"},
     O = { "<cmd>Lspsaga outline<cr>", "Outline"},
     s = { "<cmd>Lspsaga show_workspace_diagnostics<cr>", "Workspace diagnostics"},
@@ -126,9 +127,22 @@ wk.register({
     l = { "<cmd>GitConflictListQf<cr>", "list conflict" },
     r = { "<cmd>GitConflictRefresh<cr>", "conflict refresh" },
   },
+  d = {
+    name = "DiffView",
+    c = { "<cmd>DiffviewClose<cr>", "Close Diffview" },
+    h = { "<cmd>DiffviewFileHistory<cr>", "History Current branch" },
+    f = { "<cmd>DiffviewFileHistory %<cr>", "History Current file" },
+    o = { "<cmd>DiffviewOpen<cr>", "Diffview with current index" },
+    a = { "<cmd>DiffviewOpen HEAD~1<cr>", "Diffview HEAD~1" },
+    b = { "<cmd>DiffviewOpen HEAD~2<cr>", "Diffview HEAD~2" },
+    t = { "<cmd>DiffviewToggleFiles<cr>", "Diffview Toggle file" },
+    r = { "<cmd>DiffviewRefresh<cr>", "Diffview Refresh" },
+  },
   o = {
     name = "Others",
     e = { "<cmd>ConvertToDecimal<cr><cr>", "Convert whole page to Decimal" },
-    u = { "<cmd>UndotreeToggle<cr>", "Undo tree" }
+    u = { "<cmd>UndotreeToggle<cr>", "Undo tree" },
+    l = { "<cmd>set relativenumber!<cr>", "toggle Relativenumber" },
+    n = { "<cmd>set number!<cr>", "toggle Line Number" }
   }
 }, { prefix = "<Space>" })

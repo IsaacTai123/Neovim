@@ -86,6 +86,7 @@ return require('packer').startup(function(use)
 
   -- Git Conflict
   use { 'akinsho/git-conflict.nvim', tag = "*" }
+  use "sindrets/diffview.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
