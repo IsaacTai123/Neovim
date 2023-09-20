@@ -18,17 +18,17 @@ vim.api.nvim_exec([[
 
 -- Customize sign colors
 vim.cmd([[highlight GitGutterAdd guibg=NONE guifg=#009900 ctermfg=2]])
-vim.cmd([[highlight GitGutterChange guibg=NONE guifg=#bbbb00 ctermfg=3]])
+vim.cmd([[highlight GitGutterChange guibg=NONE guifg=#DC2DA7 ctermfg=3]])
 vim.cmd([[highlight GitGutterDelete guibg=NONE guifg=#ff2222 ctermfg=1]])
 
--- 定義 GitGutterLineHighlights 的顏色為亮綠色
+-- Define GitGutterLineHighlights
 vim.cmd([[highlight GitGutterAddLine guifg=NONE guibg=#45544B ]])
-vim.cmd([[highlight GitGutterChangeLine guifg=NONE guibg=#bbbb00 ]])
+vim.cmd([[highlight GitGutterChangeLine guifg=NONE guibg=#DC2DA7 ]])
 vim.cmd([[highlight GitGutterDeleteLine guifg=NONE guibg=#ff2222 ]])
 vim.cmd([[highlight GitGutterChangeDeleteLine guifg=NONE guibg=#91554B ]])
 
 
 -- Define color in Diff
 vim.cmd([[highlight diffAdd guifg=NONE guibg=#45544B ]])
-vim.cmd([[highlight diffChange guifg=NONE guibg=#C7B216 ]])
+vim.cmd([[highlight diffChange guifg=NONE guibg=#DC2DA7 ]])
 vim.cmd([[highlight diffRemove guifg=NONE guibg=#91554B ]])

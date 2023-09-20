@@ -35,7 +35,7 @@ vim.keymap.set('n', '<C-H>', '<C-W><C-H>', { silent = true })
 vim.keymap.set('n', '<M-v>', '<C-W>v', { silent = true })
 vim.keymap.set('n', '<M-s>', '<C-W>s', { silent = true })
 vim.keymap.set('n', 'Q', ':q<CR>', { silent = true })
-vim.keymap.set('n', 'XX', ':call QuitVim()<CR>', { silent = true })
+vim.keymap.set('n', 'XX', ':lua QuitVim()<CR>', { silent = true })
 -- vim.keymap.set('n', '<C-o>', '<C-w>o', { silent = true })
 -- vim.keymap.set('v', '<C-c>', '"*y:let @+=@*<CR>', { silent = true })
 vim.keymap.set('n', '<Leader>b', ':bd<CR>:bn<CR>', { silent = true }) -- close the current buffer and then enter the first opened buffer
@@ -51,23 +51,11 @@ vim.keymap.set('n', ']f', ":call search('\\(\\(if\\\\|for\\\\|while\\\\|switch\\
 vim.keymap.set('n', '[f', ":call search('\\(\\(if\\\\|for\\\\|while\\\\|switch\\\\|catch\\)\\\\_s*\\)\\@64<!(\\\\_[^)]*)\\\\_[^;{}()]*\\zs{', 'bw')<CR>", { silent = true })
 
 
--- This is not working !!!
-vim.cmd([[
-  function! QuitVim()
-    let choice = confirm("This will Exit without saving are you sure ?", "&yes\n&no", 1)
-    if choice == 1
-      execute "q!"
-      echon "Good Luck !"
-      return
-    endif
-    echon "Action canceled !"
-  endfunction
-]])
-
+-- Function written in Lua
 function QuitVim()
-  local choice = vim.fn.confirm("This will Exit without saving are you sure ?", "&yes\n&no", 1)
+  local choice = vim.fn.confirm("This will Exit out Neovim without saving are you sure ?", "&yes\n&no", 1)
   if choice == 1 then
-    vim.cmd("q!")
+    vim.cmd("qa!")
     vim.api.nvim_echo({{"Good Luck !", "MoreMsg"}}, true, {})
   else
     vim.api.nvim_echo({{"Action canceled !", "WarningMsg"}}, true, {})
