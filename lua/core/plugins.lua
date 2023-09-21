@@ -55,7 +55,7 @@ return require('packer').startup(function(use)
   -- managing & installing LSP servers
   use "williamboman/mason.nvim" -- lsp is built in neovim, but the lsp server need to be install
   use "williamboman/mason-lspconfig.nvim" -- the bridge for mason and nvim-lspconfig
-  
+
   -- Configuring lsp servers
   use "neovim/nvim-lspconfig"
   use "hrsh7th/cmp-nvim-lsp" -- configure lsp server so that they appear in autocompletion
@@ -87,6 +87,7 @@ return require('packer').startup(function(use)
   -- Git Conflict
   use { 'akinsho/git-conflict.nvim', tag = "*" }
   use "sindrets/diffview.nvim"
+  use "NeogitOrg/neogit"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

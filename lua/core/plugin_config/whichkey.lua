@@ -8,6 +8,16 @@ require("which-key").setup {
 
 local wk = require("which-key")
 
+-- #################################
+-- Load neogit 
+local ok, neogit = pcall(require, "neogit")
+if not ok or neogit == nil then
+    return
+    print("Failed to load Neogit")
+end
+-- #################################
+
+
 wk.register({
   w = {
     name = "Sample",
@@ -114,6 +124,15 @@ wk.register({
     U = { "<cmd>GitGutterUndoHunk<cr>", "Undo Hunk" },
     P = { "<cmd>GitGutterPreviewHunk<cr>", "Preview Hunk" },
     s = { "<cmd>GitGutterAll<cr>", "Update signs across all buffer" },
+  },
+  n = {
+    name = "Neogit",
+    o = { function() neogit.open() end, 'Open Neogit' },
+    c = { function() neogit.open({ "commit" }) end, 'Open Neogit' },
+    h = { function() neogit.open({ kind = "split" }) end, 'Open horizontal' },
+    v = { function() neogit.open({ kind = "vsplit" }) end, 'Open vertical' },
+    t = { function() neogit.open({ kind = "tab" }) end, 'Open vertical' },
+    y = { function() neogit.open({ cwd = "~/.config/nvim/" }) end, 'Open nvim git repo' },
   },
   c = {
     name = "Conflict",
