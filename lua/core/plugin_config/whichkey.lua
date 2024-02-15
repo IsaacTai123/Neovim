@@ -64,6 +64,14 @@ wk.register({
     T = { "<cmd>Telescope lsp_type_definitions<cr>", "Lsp type definitions" },
     t = { "<cmd>TodoTelescope<cr>", "Todo Search" },
   },
+  z = {
+      name = "True-zen",
+      n = { function() local first = 0 local last = vim.api.nvim_buf_line_count(0) GlobTruezen.narrow(first, last) end, "Narrow mode" },
+      f = { function() GlobTruezen.focus() end, "Focus mode" },
+      m = { function() GlobTruezen.minimalist() end, "Minimal mode" },
+      a = { function() GlobTruezen.ataraxis() end, "Ataraxis mode" },
+
+  },
   s = {
     name = "System",
     j = { ":horizontal resize -2<cr>", 'Decrease the height'  },
@@ -74,6 +82,7 @@ wk.register({
     n = { ":tabnext<cr>", 'Switch to next tab'  },
     p = { ":tabprevious<cr>", 'Switch to prev tab'  },
     c = { ":tabnew<cr>", 'Create a new tab'  },
+    s = { ":sp<cr>", 'slip window horizontal'  },
   },
   p = {
     name = "Packer",
