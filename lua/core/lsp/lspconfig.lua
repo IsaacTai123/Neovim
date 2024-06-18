@@ -52,7 +52,7 @@ lspconfig["gopls"].setup({
 })
 
 lspconfig["tsserver"].setup({
-    filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+    filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "typescript.ts" },
     cmd = { "typescript-language-server", "--stdio" },
     capabilities = capabilities,
     on_attach = on_attach
