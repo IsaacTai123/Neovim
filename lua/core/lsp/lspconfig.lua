@@ -4,18 +4,6 @@ if not lspconfig_status then
     return
 end
 
-local cmp_nvim_lsp_status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not cmp_nvim_lsp_status then
-    print("Falied to load cmp_nvim_lsp")
-    return
-end
-
-local typescript_setup, typescript = pcall(require, "typescript")
-if not typescript then
-    print("Falied to load typescript")
-    return
-end
-
 -- this "on_attach" func allows you to use the keymaps, when you are editing the filetypes that are supporting lsp server if you have set up that specific lsp server
 local on_attach = function(client, bufnr)
     local opts = { noremap = true, silent = true, buffer = bufnr }
@@ -35,7 +23,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'K', "<cmd>Lspsaga hover_doc<CR>", opts)
 
     -- rename file and it will update to all of the imports
-    if client.name == "tsserver" then
+    if client.name == "ts_ls" then
         vim.keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>")
     end
 end
@@ -51,7 +39,7 @@ lspconfig["gopls"].setup({
     on_attach = on_attach
 })
 
-lspconfig["tsserver"].setup({
+lspconfig["ts_ls"].setup({
     filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "typescript.ts" },
     cmd = { "typescript-language-server", "--stdio" },
     capabilities = capabilities,
