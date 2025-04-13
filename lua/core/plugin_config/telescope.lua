@@ -19,7 +19,7 @@ telescope.setup{
       }
     },
     layout_strategy = 'vertical',
-    layout_config = { height = 0.95, width = 0.5 },
+    layout_config = { height = 0.95, width = 0.6 },
     winblend=0 -- transparency
   },
   pickers = {
