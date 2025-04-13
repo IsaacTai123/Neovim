@@ -2,7 +2,6 @@ local telescope_status, telescope = pcall(require, 'telescope')
 
 local a = vim.api
 local actions = require "telescope.actions"
-local config = require "telescope.config"
 
 telescope.setup{
   defaults = {
