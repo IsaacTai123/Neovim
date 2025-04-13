@@ -1,6 +1,5 @@
 local telescope_status, telescope = pcall(require, 'telescope')
 
-local a = vim.api
 local actions = require "telescope.actions"
 
 telescope.setup{
