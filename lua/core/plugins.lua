@@ -1,105 +1,101 @@
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
+-- Use :Lazy to open Lazy.nvim UI
+-- :Lazy update to update plugins
+
+-- [[ Install `lazy.nvim` plugin manager ]]
+-- See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
+-- This piece of code is a bootstrapping script that automatically installs lazy.nvim. The first time you launch Neovim, it checks if lazy.nvim exists, and if not, it clones it from GitHub.
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
+  local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
+  if vim.v.shell_error ~= 0 then
+    error('Error cloning lazy.nvim:\n' .. out)
   end
-  return false
 end
 
-local packer_bootstrap = ensure_packer()
+-- [[Add the path to lazy.nvim at the beginning of the runtimepath]]
+-- Neovim searches runtimepath in order. By adding Lazy.nvim to the front, you make sure it loads first — this avoids conflicts or not finding it.
+---@type vim.Option
+local rtp = vim.opt.rtp
+rtp:prepend(lazypath)
 
-return require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
+-- [[ Configure and install plugins ]]
+require("lazy").setup({
 
-  -- color scheme
-  use 'bluz71/vim-nightfly-guicolors'
-  use 'ellisonleao/gruvbox.nvim'
-  use 'nvim-tree/nvim-tree.lua'
-  use 'nvim-tree/nvim-web-devicons'
-  use 'nvim-lualine/lualine.nvim'
-  use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-  }
-  use {
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.8',
-    requires = { { 'nvim-lua/plenary.nvim'} }
-  }
-  use 'voldikss/vim-floaterm'
-  -- Lua
-  use "folke/which-key.nvim"
+  -- UI Enhancements
+  { "bluz71/vim-nightfly-guicolors" },
+  { "ellisonleao/gruvbox.nvim" },
+  { "nvim-tree/nvim-web-devicons" },
+  { "nvim-lualine/lualine.nvim" },
+  { "akinsho/bufferline.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
+  { "fgheng/winbar.nvim" },
+  { "mhinz/vim-startify" },
 
-  -- move cursor
-  use "easymotion/vim-easymotion"
-  -- use "justinmk/vim-sneak"
+  -- File Explorer
+  { "nvim-tree/nvim-tree.lua" },
 
-  use "tpope/vim-surround"
-  use "airblade/vim-gitgutter"
+  -- Syntax and Treesitter
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
-  -- Autocompletion
-  use "hrsh7th/nvim-cmp" -- Auto completion engine plugin for nvim
-  use "hrsh7th/cmp-buffer"
-  use "hrsh7th/cmp-path" -- auto completion when it comes to path
-  use "onsails/lspkind.nvim" -- add vscode like icons to autocompletion
+  -- Telescope
+  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 
-  -- snippets
-  use "L3MON4D3/LuaSnip" -- snip engine
-  use "saadparwaiz1/cmp_luasnip" -- allow nvim-cmp to show autocompletion
-  use "rafamadriz/friendly-snippets" -- a lot of useful snippet for a lot of language
+  -- Terminal
+  { "voldikss/vim-floaterm" },
 
-  -- managing & installing LSP servers
-  use "williamboman/mason.nvim" -- lsp is built in neovim, but the lsp server need to be install
-  use "williamboman/mason-lspconfig.nvim" -- the bridge for mason and nvim-lspconfig
+  -- WhichKey
+  { "folke/which-key.nvim" },
 
-  -- Configuring lsp servers
-  use "neovim/nvim-lspconfig"
-  use "hrsh7th/cmp-nvim-lsp" -- configure lsp server so that they appear in autocompletion
-  use {
-    "glepnir/lspsaga.nvim",
-    branch = "main"
-  } -- add enhance UI to LSP experience
+  -- Motion Plugins
+  { "easymotion/vim-easymotion" },
+  -- { "justinmk/vim-sneak" },
 
-  use "jose-elias-alvarez/typescript.nvim" -- add more functionality to typescript server
+  -- Text Editing
+  { "tpope/vim-surround" },
+  { "tpope/vim-commentary" },
+  { "jiangmiao/auto-pairs" },
+  { "airblade/vim-gitgutter" },
+
+  -- Completion
+  { "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-path" },
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "onsails/lspkind.nvim" },
+
+  -- Snippets
+  { "L3MON4D3/LuaSnip" },
+  { "saadparwaiz1/cmp_luasnip" },
+  { "rafamadriz/friendly-snippets" },
+
+  -- LSP
+  { "williamboman/mason.nvim" },
+  { "williamboman/mason-lspconfig.nvim" }, -- the bridge for mason and nvim-lspconfig
+  { "neovim/nvim-lspconfig" },
+  { "glepnir/lspsaga.nvim", branch = "main" },
+  { "jose-elias-alvarez/typescript.nvim" },
 
   -- GoLang
-  use "fatih/vim-go"
+  { "fatih/vim-go" },
 
-  -- Comment
-  use "tpope/vim-commentary"
+  -- Productivity
+  { "ThePrimeagen/harpoon" },
+  { "mbbill/undotree" },
 
-  use 'fgheng/winbar.nvim'
-  use 'mhinz/vim-startify'
-  use 'jiangmiao/auto-pairs'
+  -- TODO Comments
+  { "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 
-  use 'mbbill/undotree'
-  use 'ThePrimeagen/harpoon'
+  -- Git Tools
+  { "akinsho/git-conflict.nvim" },
+  { "sindrets/diffview.nvim" },
+  { "NeogitOrg/neogit" },
 
-  use {
-    "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-  }
-
-  -- Git Conflict
-  use { 'akinsho/git-conflict.nvim', tag = "*" }
-  use "sindrets/diffview.nvim"
-  use "NeogitOrg/neogit"
-
-  -- View
-  use { "Pocco81/true-zen.nvim" }
+  -- Writing
+  { "Pocco81/true-zen.nvim" },
 
   -- Copilot
-  use 'github/copilot.vim'
+  { "github/copilot.vim" },
 
-  use 'echasnovski/mini.icons'
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
+  -- UI Icons
+  { "echasnovski/mini.icons" },
+})
