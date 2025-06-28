@@ -25,9 +25,8 @@ require("lazy").setup({
   -- UI Enhancements
   { "bluz71/vim-nightfly-guicolors" },
   { "ellisonleao/gruvbox.nvim" },
-  { "nvim-tree/nvim-web-devicons" },
+  { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
   { "nvim-lualine/lualine.nvim" },
-  { "akinsho/bufferline.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
   { "fgheng/winbar.nvim" },
   { "mhinz/vim-startify" },
 
@@ -37,8 +36,35 @@ require("lazy").setup({
   -- Syntax and Treesitter
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
-  -- Telescope
-  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+  -- Fuzzy Finder (files, lsp, etc)
+  {
+    "nvim-telescope/telescope.nvim",
+    event = "VimEnter", -- Load plugins automatically after Neovim startup is completed 
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+
+        -- `build` is used to run some command when the plugin is installed/updated.
+        -- This is only run then, not every time Neovim starts up.
+        build = 'make',
+
+        -- `cond` is a condition used to determine whether this plugin should be
+        -- installed and loaded.
+        cond = function()
+          return vim.fn.executable 'make' == 1
+        end,
+      },
+      { 'nvim-telescope/telescope-ui-select.nvim' },
+    },
+    config = function()
+      -- require("core.plugin_config.telescope")
+      local ok, err = pcall(require, "core.plugin_config.telescope")
+      if not ok then
+        vim.notify("Failed to load telescope config: " .. err, vim.log.levels.ERROR)
+      end
+    end,
+  },
 
   -- Terminal
   { "voldikss/vim-floaterm" },
