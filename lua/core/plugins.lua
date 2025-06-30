@@ -22,20 +22,6 @@ rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 require("lazy").setup({
 
-  -- UI Enhancements
-  { "bluz71/vim-nightfly-guicolors" },
-  { "ellisonleao/gruvbox.nvim" },
-  { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
-  { "nvim-lualine/lualine.nvim" },
-  { "fgheng/winbar.nvim" },
-  { "mhinz/vim-startify" },
-
-  -- File Explorer
-  { "nvim-tree/nvim-tree.lua" },
-
-  -- Syntax and Treesitter
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-
   -- Fuzzy Finder (files, lsp, etc)
   {
     "nvim-telescope/telescope.nvim",
@@ -66,6 +52,58 @@ require("lazy").setup({
     end,
   },
 
+  -- LSP Plugins
+  {
+    -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
+    -- used for completion, annotations and signatures of Neovim apis
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = {
+      library = {
+        -- Load luvit types when the `vim.uv` word is found
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+      },
+    },
+  },
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      -- Automatically install LSPs and related tools to stdpath for Neovim
+      -- Mason must be loaded before its dependents so we need to set it up here.
+      -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
+      { "mason-org/mason.nvim", opts = {} },
+      "mason-org/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+
+      -- Useful status updates for LSP.
+      { "j-hui/fidget.nvim", opts = {} },
+
+      -- Allows extra capabilities provided by blink.cmp
+      "saghen/blink.cmp",
+    },
+    config = function()
+      require("core.lsp.init")
+    end,
+  },
+  
+  -- { "jose-elias-alvarez/typescript.nvim" },
+
+  -- UI Enhancements
+  { "bluz71/vim-nightfly-guicolors" },
+  { "ellisonleao/gruvbox.nvim" },
+  { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+  { "nvim-lualine/lualine.nvim" },
+  { "fgheng/winbar.nvim" },
+  { "mhinz/vim-startify" },
+
+  -- File Explorer
+  { "nvim-tree/nvim-tree.lua" },
+
+  -- Syntax and Treesitter
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+
+  
+
   -- Terminal
   { "voldikss/vim-floaterm" },
 
@@ -93,13 +131,6 @@ require("lazy").setup({
   { "L3MON4D3/LuaSnip" },
   { "saadparwaiz1/cmp_luasnip" },
   { "rafamadriz/friendly-snippets" },
-
-  -- LSP
-  { "williamboman/mason.nvim" },
-  { "williamboman/mason-lspconfig.nvim" }, -- the bridge for mason and nvim-lspconfig
-  { "neovim/nvim-lspconfig" },
-  { "glepnir/lspsaga.nvim", branch = "main" },
-  { "jose-elias-alvarez/typescript.nvim" },
 
   -- GoLang
   { "fatih/vim-go" },

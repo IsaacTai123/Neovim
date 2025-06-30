@@ -1,28 +1,23 @@
-local mason_status, mason = pcall(require, "mason")
-if not mason_status then
-  print("Failed to load mason")
-  return
-end
+-- local helper = require("core.helper")
 
-local mason_lspconfig_status, mason_lspconfig = pcall(require, "mason-lspconfig")
-if not mason_lspconfig_status then
-  print("Failed to load mason_lspconfig")
-  return
-end
+-- local mason_lspconfig_status, mason_lspconfig = pcall(require, "mason-lspconfig")
+-- if not mason_lspconfig_status then
+--   print("Failed to load mason_lspconfig")
+--   return
+-- end
 
-mason.setup()
-
-mason_lspconfig.setup({
-  ensure_installed = {
-    "ts_ls",
-    "html",
-    "cssls",
-    "gopls",
-    "lua_ls",
-    "docker_compose_language_service",
-    "dockerls",
-    "yamlls",
-    "vimls",
-    "jsonls"
-  }
-})
+-- mason_lspconfig.setup({
+--   automatic_enable = false,
+--   ensure_installed = {
+--     "ts_ls",
+--     "html",
+--     "cssls",
+--     "gopls",
+--     "lua_ls",
+--     "yamlls",
+--     "vimls",
+--     "jsonls",
+--     "dockerls",
+--     "docker_compose_language_service",
+--   }
+-- })

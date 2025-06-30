@@ -61,33 +61,6 @@ wk.add({
   { "<Space>fa", "<cmd>FloatermNew! --height=0.98 --width=0.98 --wintype=float --name=lazygit --position=center --autoclose=1 tig --all<cr>", desc = "tig all reference" }
 })
 
--- Telescope group
-wk.add({
-  { "<Space>t", group = "Telescope" },
-  { "<Space>tj", "<cmd>lua require('telescope.builtin').grep_string<cr>", desc = "Search all in current file" },
-  { "<Space>ta", "<cmd>lua require('telescope.builtin').live_grep()<cr>", desc = "Search all in cur dir" },
-  { "<Space>to", "<cmd>lua require('telescope.builtin').oldfiles()<cr>", desc = "Search in oldfiles" },
-  { "<Space>tb", "<cmd>lua require('telescope.builtin').buffers()<cr>", desc = "Search in buffers" },
-  { "<Space>tf", "<cmd>lua require('telescope.builtin').find_files()<cr>", desc = "Find files" },
-  { "<Space>th", "<cmd>lua require('telescope.builtin').help_tags()<cr>", desc = "Search for help tags" },
-  { "<Space>tH", "<cmd>lua require('telescope.builtin').command_history<cr>", desc = "Search for command history" },
-  { "<Space>tw", "<cmd>lua require('telescope.builtin').spell_suggest<cr>", desc = "Spell suggest" },
-  { "<Space>tg", "<cmd>lua require('telescope.builtin').git_files<cr>", desc = "Git files" },
-  { "<Space>tG", "<cmd>lua require('telescope.builtin').git_status<cr>", desc = "Git status" },
-  { "<Space>tc", "<cmd>lua require('telescope.builtin').git_commits<cr>", desc = "Git commits" },
-  { "<Space>ts", "<cmd>lua require('telescope.builtin').git_stash<cr>", desc = "Git stash" },
-  { "<Space>tv", "<cmd>lua require('telescope.builtin').treesitter<cr>", desc = "Treesitter show variable" },
-  { "<Space>tR", "<cmd>lua require('telescope.builtin').lsp_references<cr>", desc = "Lsp references" },
-  { "<Space>tI", "<cmd>lua require('telescope.builtin').lsp_incoming_calls<cr>", desc = "Lsp incoming_calls" },
-  { "<Space>tO", "<cmd>lua require('telescope.builtin').lsp_outcoming_calls<cr>", desc = "Lsp outcoming_calls" },
-  { "<Space>tS", "<cmd>lua require('telescope.builtin').lsp_document_symbols<cr>", desc = "Lsp document symbols" },
-  { "<Space>tW", "<cmd>lua require('telescope.builtin').lsp_workspace_symbols<cr>", desc = "Lsp workspace symbols" },
-  { "<Space>tL", "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols<cr>", desc = "Lsp dynamic work symbols" },
-  { "<Space>tD", "<cmd>lua require('telescope.builtin').lsp_diagnostics<cr>", desc = "Lsp diagnostics" },
-  { "<Space>tP", "<cmd>lua require('telescope.builtin').lsp_implementations<cr>", desc = "Lsp implementation" },
-  { "<Space>tT", "<cmd>lua require('telescope.builtin').lsp_type_definitions<cr>", desc = "Lsp type definitions" },
-  { "<Space>tt", "<cmd>TodoTelescope<cr>", desc = "Todo Search" },
-})
 
 -- True-zen group
 wk.add({
@@ -120,38 +93,37 @@ wk.add({
   { "<Space>pS", ":PackerStatus<cr>", desc = "Packer Status" },
   { "<Space>pu", ":PackerUpdate<cr>", desc = "Packer update" },
 })
-
 -- LSP group
-wk.add({
-  { "<Space>l", group = "LSP" },
-  { "<Space>la", "<cmd>Lspsaga code_action<cr>", desc = "Action" },
-  { "<Space>lk", "<cmd>Lspsaga peek_definition<cr>", desc = "Peek definition" },
-  { "<Space>lg", "<cmd>Lspsaga goto_definition<cr>", desc = "Goto definition" },
-  { "<Space>lh", "<cmd>Lspsaga hover_doc<cr>", desc = "Hover doc" },
-  { "<Space>lH", "<cmd>Lspsaga hover_doc ++keep<cr>", desc = "Hover doc keep" },
-  { "<Space>lt", "<cmd>Lspsaga peek_type_definition<cr>", desc = "Peek type definition" },
-  { "<Space>lT", "<cmd>Lspsaga goto_type_definition<cr>", desc = "Goto type definition" },
-  { "<Space>lR", "<cmd>Lspsaga project_replace<cr>", desc = "Project replace" },
-  { "<Space>lO", "<cmd>Lspsaga outline<cr>", desc = "Outline" },
-  { "<Space>ls", "<cmd>Lspsaga show_workspace_diagnostics<cr>", desc = "Workspace diagnostics" },
-  { "<Space>ld", "<cmd>Lspsaga show_line_diagnostics<cr>", desc = "Line diagnostics" },
-  { "<Space>lb", "<cmd>Lspsaga show_buf_diagnostics<cr>", desc = "Buffer diagnostics" },
-  { "<Space>lc", "<cmd>Lspsaga show_cursor_diagnostics<cr>", desc = "Cursor diagnostics" },
-  { "<Space>ln", "<cmd>Lspsaga diagnostic_jump_next<cr>", desc = "Jump to next diagnostics" },
-  { "<Space>lp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", desc = "Jump to prev diagnostics" },
-  { "<Space>lr", "<cmd>Lspsaga rename<cr>", desc = "Rename" },
-  { "<Space>lz", "<cmd>Lspsaga term_toggle<cr>", desc = "Terminal toggle" },
-  { "<Space>li", "<cmd>Lspsaga incoming_calls<cr>", desc = "Incoming calls" },
-  { "<Space>lo", "<cmd>Lspsaga outcoming_calls<cr>", desc = "Outcoming calls" },
-  { "<Space>lf", "<cmd>Lspsaga finder tyd+def+ref+imp<cr>", desc = "Finder tyd + def + ref + imp" },
-  { "<Space>lfi", "<cmd>Lspsaga finder imp<cr>", desc = "Finder implementation" },
-  { "<Space>lfr", "<cmd>Lspsaga finder ref<cr>", desc = "Finder reference" },
-  { "<Space>lft", "<cmd>Lspsaga finder tyd<cr>", desc = "Finder type definition" },
-  { "<Space>lF", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", desc = "Format" },
-  { "<Space>lI", "<cmd>LspInfo<cr>", desc = "Info" },
-  { "<Space>lq", "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", desc = "Quickfix" },
-  { "<Space>lD", "<cmd>lua require('telescope.builtin').lsp_document_symbols<cr>", desc = "Document Symbols" },
-})
+-- wk.add({
+--   { "<Space>l", group = "LSP" },
+--   { "<Space>la", "<cmd>Lspsaga code_action<cr>", desc = "Action" },
+--   { "<Space>lk", "<cmd>Lspsaga peek_definition<cr>", desc = "Peek definition" },
+--   { "<Space>lg", "<cmd>Lspsaga goto_definition<cr>", desc = "Goto definition" },
+--   { "<Space>lh", "<cmd>Lspsaga hover_doc<cr>", desc = "Hover doc" },
+--   { "<Space>lH", "<cmd>Lspsaga hover_doc ++keep<cr>", desc = "Hover doc keep" },
+--   { "<Space>lt", "<cmd>Lspsaga peek_type_definition<cr>", desc = "Peek type definition" },
+--   { "<Space>lT", "<cmd>Lspsaga goto_type_definition<cr>", desc = "Goto type definition" },
+--   { "<Space>lR", "<cmd>Lspsaga project_replace<cr>", desc = "Project replace" },
+--   { "<Space>lO", "<cmd>Lspsaga outline<cr>", desc = "Outline" },
+--   { "<Space>ls", "<cmd>Lspsaga show_workspace_diagnostics<cr>", desc = "Workspace diagnostics" },
+--   { "<Space>ld", "<cmd>Lspsaga show_line_diagnostics<cr>", desc = "Line diagnostics" },
+--   { "<Space>lb", "<cmd>Lspsaga show_buf_diagnostics<cr>", desc = "Buffer diagnostics" },
+--   { "<Space>lc", "<cmd>Lspsaga show_cursor_diagnostics<cr>", desc = "Cursor diagnostics" },
+--   { "<Space>ln", "<cmd>Lspsaga diagnostic_jump_next<cr>", desc = "Jump to next diagnostics" },
+--   { "<Space>lp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", desc = "Jump to prev diagnostics" },
+--   { "<Space>lr", "<cmd>Lspsaga rename<cr>", desc = "Rename" },
+--   { "<Space>lz", "<cmd>Lspsaga term_toggle<cr>", desc = "Terminal toggle" },
+--   { "<Space>li", "<cmd>Lspsaga incoming_calls<cr>", desc = "Incoming calls" },
+--   { "<Space>lo", "<cmd>Lspsaga outcoming_calls<cr>", desc = "Outcoming calls" },
+--   { "<Space>lf", "<cmd>Lspsaga finder tyd+def+ref+imp<cr>", desc = "Finder tyd + def + ref + imp" },
+--   { "<Space>lfi", "<cmd>Lspsaga finder imp<cr>", desc = "Finder implementation" },
+--   { "<Space>lfr", "<cmd>Lspsaga finder ref<cr>", desc = "Finder reference" },
+--   { "<Space>lft", "<cmd>Lspsaga finder tyd<cr>", desc = "Finder type definition" },
+--   { "<Space>lF", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", desc = "Format" },
+--   { "<Space>lI", "<cmd>LspInfo<cr>", desc = "Info" },
+--   { "<Space>lq", "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", desc = "Quickfix" },
+--   { "<Space>lD", "<cmd>lua require('telescope.builtin').lsp_document_symbols<cr>", desc = "Document Symbols" },
+-- })
 
 -- Gitgutter group
 wk.add({
