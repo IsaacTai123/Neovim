@@ -1,14 +1,13 @@
 -- Key mapping
-vim.g.mapleader = ","
+vim.g.mapleader = " " -- map <Space> as leader key
 vim.g.maplocalleader = " "
 
 -- Appearance
 vim.opt.cmdheight = 1
-vim.api.nvim_win_set_option(0, 'number', true)
 vim.opt.relativenumber = true
+vim.g.have_nerd_font = true
 
 vim.opt.showmode = false
--- vim.api.nvim_command('set noshowmode')
 vim.opt.showcmd = true
 vim.opt.list = false
 vim.opt.wrap = true
@@ -30,12 +29,8 @@ vim.opt.pumheight = 6      -- Set pop up windows max height
 vim.opt.backspace = '2'
 vim.opt.autoread = true
 vim.opt.laststatus = 2
--- vim.opt.autowrite = true  -- Auto save changes when you switch to other buffer
 
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4    -- Set the level indent for ">>", "<<"
 vim.opt.shiftround = true --  aligns the indentation to the nearest multiple of shiftwidth when using >> and << commands
-vim.opt.expandtab = true
 
 -- Split window
 vim.opt.splitbelow = true
@@ -53,11 +48,6 @@ vim.opt.swapfile = false
 vim.opt.hidden = true
 vim.o.omnifunc = 'syntaxcomplete#Complete'
 vim.opt.compatible = false
-
--- Filetype
--- vim.cmd('filetype on')
--- vim.cmd('filetype indent on')
--- vim.cmd('filetype plugin on')
 
 -- Search
 vim.opt.hlsearch = true

@@ -5,9 +5,11 @@
 A modern and practical Neovim setup using packer.nvim as plugin manager. This configuration focuses on clean UI, efficient navigation, autocompletion, LSP, Git integration, and improved editing experience.
 
 ---
+
 ## 📦 Plugin Overview & Usage
 
-🎨 UI & Appearance
+UI & Appearance
+
 - nightfly / gruvbox: Beautiful and consistent color schemes
 - nvim-tree: File explorer (toggle with :NvimTreeToggle)
 - bufferline: Tab-like buffer navigation
@@ -19,6 +21,7 @@ A modern and practical Neovim setup using packer.nvim as plugin manager. This co
 - mini.icons: Icon support for statusline and LSP
 
 ---
+
 ## ⚡ Navigation & Motion
 
 ### Harpoon
@@ -29,48 +32,65 @@ Harpoon is a fast file bookmarking plugin for Neovim. It lets you quickly mark, 
 - Open simple ui to navigate quickly
 - Jump to any marked file
 - Nav forware/backward
+
+### EasyMotion:
+
+- `f{char}` — Jump to a specific character in the buffer or all windows
+- `s{char}{char}` — Jump to a two-character sequence across windows
+- `<Leader>l` — Jump to the beginning of a visible line
+- `<Leader>w` — Jump to the beginning of a visible word
+- `/ + {char}` — Search for a single character and jump (EasyMotion-style)
+- `n` — Jump to the next EasyMotion match
+- `N` — Jump to the previous EasyMotion match
+
 ---
+
+## 🔍 Fuzzy Search
+
+- telescope.nvim: Powerful fuzzy finder
+
 ---
 
-## 🐦‍🔥 Debug
+## 🔧 LSP
 
-### Circular Dependency Issue with Telescope
+- nvim-lspconfig: LSP configuration
+- mason.nvim: LSP/DAP/formatter installer (:Mason to open UI)
+- mason-lspconfig.nvim: Bridge between Mason and native LSP
+- maxon-tool-installer.nvim: Install LSP servers, formatters, and debuggers
 
-📌 Note:
+### nvim-lspconfig
 
-Avoid requiring the entire `core.plugin_config` folder in init.lua (e.g., `require("core.plugin_config")`).
-Doing so will immediately execute all plugin config files—including Telescope's config—
-even before Lazy.nvim has loaded the plugin.
+Responsible for configuring and launching LSP servers.
 
-This caused a circular dependency issue where:
+- Maintained by the official Neovim team.
+- Provides easy lspconfig.<server>.setup() APIs to configure each LSP server manually.
 
-1. `init.lua` eagerly loads `core.plugin_config`, which includes `telescope.lua`
-2. `telescope.lua` tries to call `require("telescope")` and configure it
-3. At the same time, Lazy.nvim is also preparing to lazy-load `telescope.nvim`
-4. This results in both sides trying to load `telescope.nvim` simultaneously,
-   leading to a "loop or previous error loading module" message
+### mason.nvim
 
-✅ Solution:
+A package manager for LSP servers, formatters, and debuggers.
 
-- Do NOT require `core.plugin_config` in `init.lua`
-- Instead, in `core.plugins.lua`, use Lazy's `config = function()` to load plugin config individually
-  when the plugin is actually initialized.
+- Provides a GUI (:Mason) to install tools like lua-language-server, prettier, debugpy, etc.
+- Installs tools but does not automatically configure them with lspconfig.
 
-Example:
+### mason-lspconfig.nvim
 
-```lua
-{
-  "nvim-telescope/telescope.nvim",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make", cond = function() return vim.fn.executable("make") == 1 end },
-    "nvim-telescope/telescope-ui-select.nvim",
-  },
-  config = function()
-    local ok, err = pcall(require, "core.plugin_config.telescope")
-    if not ok then
-      vim.notify("Failed to load telescope config: " .. err, vim.log.levels.ERROR)
-    end
-  end,
-}
-```
+Bridges mason.nvim and nvim-lspconfig.
+
+- Automatically connects installed LSP servers from Mason to lspconfig.
+- Handles server name mapping and calls lspconfig[server].setup() for you.
+- Supports both ensure_installed and automatic_installation.
+
+### mason-tool-installer.nvim
+
+Automatically installs a list of desired tools via Mason.
+
+- Helps manage and install LSPs, formatters, linters, and DAPs in one place.
+- You define a list via ensure_installed = { "lua_ls", "stylua", "prettier", ... }.
+- Ensures all required tools are installed on startup.
+
+### How they work together
+
+1. You define which tools and LSPs to install in mason-tool-installer.
+2. mason.nvim installs those tools behind the scenes.
+3. mason-lspconfig.nvim connects the installed LSPs to nvim-lspconfig.
+4. nvim-lspconfig applies your custom configuration to each LSP server.

@@ -88,6 +88,15 @@ require("lazy").setup({
   
   -- { "jose-elias-alvarez/typescript.nvim" },
 
+  -- WhichKey
+  { 
+    "folke/which-key.nvim",
+    event = "VimEnter",
+    config = function()
+      require("core.plugin_config.whichkey")
+    end
+  },
+
   -- UI Enhancements
   { "bluz71/vim-nightfly-guicolors" },
   { "ellisonleao/gruvbox.nvim" },
@@ -106,9 +115,6 @@ require("lazy").setup({
 
   -- Terminal
   { "voldikss/vim-floaterm" },
-
-  -- WhichKey
-  { "folke/which-key.nvim" },
 
   -- Motion Plugins
   { "easymotion/vim-easymotion" },
