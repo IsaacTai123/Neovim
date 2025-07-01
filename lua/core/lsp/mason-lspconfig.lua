@@ -2,7 +2,7 @@ local helper = require("core.helper")
 local mason_lspconfig = helper.safe_require("mason-lspconfig")
 local lspconfig = helper.safe_require("lspconfig")
 local capabilities = require('blink.cmp').get_lsp_capabilities()
-
+local servers = require("core.lsp.servers")
 
 
 mason_lspconfig.setup {
