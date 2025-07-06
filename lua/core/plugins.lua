@@ -139,13 +139,21 @@ require("lazy").setup({
     end
   },
 
-  -- UI Enhancements
-  { "bluz71/vim-nightfly-guicolors" },
-  { "ellisonleao/gruvbox.nvim" },
-  { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
-  { "nvim-lualine/lualine.nvim" },
-  { "fgheng/winbar.nvim" },
-  { "mhinz/vim-startify" },
+  -- ColorScheme
+  { -- You can easily change to a different colorscheme.
+    -- Change the name of the colorscheme plugin below, and then
+    -- change the command in the config to whatever the name of that colorscheme is.
+    --
+    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+    'folke/tokyonight.nvim',
+    priority = 1000, -- Make sure to load this before all the other start plugins.
+    config = function()
+      require("core.plugin_config.colorscheme")
+    end,
+  },
+
+  -- TODO Comments
+  { "folke/todo-comments.nvim", event = "VimEnter", dependencies = { "nvim-lua/plenary.nvim" }, opts = { signs = false }  },
 
   -- File Explorer
   { "nvim-tree/nvim-tree.lua" },
@@ -154,6 +162,11 @@ require("lazy").setup({
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
   
+  -- UI Enhancements
+  -- { "bluz71/vim-nightfly-guicolors" },
+  -- { "ellisonleao/gruvbox.nvim" },
+  -- { "fgheng/winbar.nvim" },
+  -- { "mhinz/vim-startify" },
 
   -- Terminal
   { "voldikss/vim-floaterm" },
