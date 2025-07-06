@@ -94,3 +94,115 @@ Automatically installs a list of desired tools via Mason.
 2. mason.nvim installs those tools behind the scenes.
 3. mason-lspconfig.nvim connects the installed LSPs to nvim-lspconfig.
 4. nvim-lspconfig applies your custom configuration to each LSP server.
+
+---
+
+## Autocompletion
+
+---
+
+## Snippets
+
+- "L3MON4D3/LuaSnip": Snippet engine
+
+VSCode snippets are just static data files (in JSON format).
+They don’t contain logic—they’re simply templates that VSCode reads and loads into memory.
+
+VScode snippet example:
+
+```json
+{
+  "Print to console": {
+    "prefix": "log",
+    "body": ["console.log('$1');"],
+    "description": "Log output to console"
+  }
+}
+```
+
+### Why use Lua in Neovim
+
+Neovim doesn’t have built-in snippet support like VSCode.
+You need a plugin to handle snippets. LuaSnip is one of the most powerful snippet engines for Neovim.
+
+LuaSnip supports two approaches:
+
+1. Static snippets: Lazy-load VSCode JSON snippets.
+
+```lua
+require("luasnip.loaders.from_vscode").lazy_load()
+```
+
+2. Dynamic snippets: Write your snippets in Lua to include logic, like:
+
+```lua
+s("time", {
+  t(os.date("%Y-%m-%d")),
+})
+```
+
+---
+
+## mini
+
+### mini.ai
+
+mini.ai extends text objects in Neovim. It lets you easily select, delete, or copy code blocks like parentheses, quotes, HTML tags, and more.
+
+Example:
+
+- `vi(` → select inside parentheses
+- `va"` → select around double quotes
+- `da}` → delete a block inside curly braces
+- `yi>` → yank (copy) content inside HTML tags
+
+### mini.surround
+
+mini.surround is a plugin to add, delete, or change surrounding characters, like parentheses, quotes, or HTML tags.
+
+Example:
+
+- `ysiw"` → add double quotes around the current word
+- `cs"'` → change surrounding " to '
+- `ds(` → delete surrounding parentheses
+
+#### Why choose mini.surround over vim-surround?
+
+- mini.surround is extremely lightweight. Only implements the core features—no extra overhead.
+- It’s written in Lua, making it faster and more efficient.
+- Doesn’t require legacy Vim compatibility layers or plugins.
+- If you’re already using other mini.nvim modules (like mini.ai, mini.comment), it’s easier to keep things consistent.
+
+### mini.statusline
+
+mini.statusline is a lightweight statusline plugin for Neovim.
+
+#### Compare to lualine.nvim
+
+- mini.statusline is extremely lightweight and fast.
+- no external dependencies.
+- Basic customization (Lualin has more features).
+- lualine can show more complex information like diagnostics, git status, file format, etc.
+- recommended for users who want something simple
+
+---
+
+## Treesitter
+
+Tree-sitter is a code parser engine that reads your code and builds a syntax tree, allowing Neovim to understand the structure of your code, not just the words.
+
+### What is it used for
+
+- Syntax highlighting – better and more precise coloring.
+- Text object selection – easily select functions, classes, blocks, etc.
+- Code folding – fold code based on syntax, not just indentation.
+- Automatic indentation – smarter indentation rules.
+- Movement between blocks – jump between functions, classes, and other code blocks.
+- Incremental selection – gradually expand your selection to cover larger code structures.
+
+Example
+
+```vim
+vaf   -- visual select a function (function block)
+vac   -- visual select a class
+```
