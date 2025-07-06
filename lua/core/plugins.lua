@@ -209,6 +209,15 @@ require("lazy").setup({
     end
   },
 
+  -- Git
+  {
+    "lewis6991/gitsigns.nvim",
+    event = 'VimEnter',
+    config = function()
+      require("core.plugin_config.gitsigns")
+    end,
+  }
+
   -- UI Enhancements
   -- { "bluz71/vim-nightfly-guicolors" },
   -- { "ellisonleao/gruvbox.nvim" },
