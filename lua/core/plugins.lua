@@ -155,6 +155,13 @@ require("lazy").setup({
   -- TODO Comments
   { "folke/todo-comments.nvim", event = "VimEnter", dependencies = { "nvim-lua/plenary.nvim" }, opts = { signs = false }  },
 
+  -- Collection of various small independent plugins/modules
+  {
+    "echasnovski/mini.nvim",
+    config = function()
+      require("core.plugin_config.mini")
+    end,
+  },
   -- File Explorer
   { "nvim-tree/nvim-tree.lua" },
 
