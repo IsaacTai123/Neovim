@@ -22,16 +22,16 @@ vim.cmd("command! -nargs=1 RemoveMark lua RemoveMark(<args>)")
 local wk = require("which-key")
 
 wk.add({
-  { "<Space>h", group = "Harpoon" },
-  { "<Space>ha", mark.add_file, desc = "Add mark to File" },
-  { "<Space>hr", mark.rm_file, desc = "Remove File mark" },
-  { "<Space>hc", mark.clear_all, desc = "Clear all marks" },
-  { "<Space>hm", ui.toggle_quick_menu, desc = "Harpoon Menu" },
-  { "<Space>hn", ui.nav_next, desc = "Next File" },
-  { "<Space>hp", ui.nav_prev, desc = "Previous File" },
-  { "<Space>h1", function() ui.nav_file(1) end, desc = "Go to File 1" },
-  { "<Space>h2", function() ui.nav_file(2) end, desc = "Go to File 2" },
-  { "<Space>h3", function() ui.nav_file(3) end, desc = "Go to File 3" },
-  { "<Space>h4", function() ui.nav_file(4) end, desc = "Go to File 4" },
-  { "<Space>hd", function() helper.input_prompt("Enter mark index to remove: ", RemoveMark) end, desc = "Remove specific mark" },
+  { "<leader>b", group = "Harpoon [Bookmark]" },
+  { "<leader>ba", mark.add_file, desc = "Add mark to File" },
+  { "<leader>br", mark.rm_file, desc = "Remove File mark" },
+  { "<leader>bc", mark.clear_all, desc = "Clear all marks" },
+  { "<leader>bm", ui.toggle_quick_menu, desc = "Harpoon Menu" },
+  { "<leader>bn", ui.nav_next, desc = "Next File" },
+  { "<leader>bp", ui.nav_prev, desc = "Previous File" },
+  { "<leader>b1", function() ui.nav_file(1) end, desc = "Go to File 1" },
+  { "<leader>b2", function() ui.nav_file(2) end, desc = "Go to File 2" },
+  { "<leader>b3", function() ui.nav_file(3) end, desc = "Go to File 3" },
+  { "<leader>b4", function() ui.nav_file(4) end, desc = "Go to File 4" },
+  { "<leader>bd", function() helper.input_prompt("Enter mark index to remove: ", RemoveMark) end, desc = "Remove specific mark" },
 })

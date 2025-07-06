@@ -95,5 +95,3 @@ end, {})
 -- If you want to integrate with nvim-cmp, set priority
 -- Prevent Copilot suggestions from conflicting with cmp
 vim.g.copilot_no_tab_map = true
-
-print("Copilot configuration loaded successfully!")

@@ -192,8 +192,23 @@ require("lazy").setup({
     end,
   },
 
+  -- Productivity
+  { 
+    "ThePrimeagen/harpoon",
+    lazy = true,
+    config = function()
+      require("core.plugin_config.harpoon")
+    end,
+  },
 
-  
+  -- Copilot
+  { 
+    "github/copilot.vim",
+    config = function()
+      require("core.plugin_config.copilot")
+    end
+  },
+
   -- UI Enhancements
   -- { "bluz71/vim-nightfly-guicolors" },
   -- { "ellisonleao/gruvbox.nvim" },
