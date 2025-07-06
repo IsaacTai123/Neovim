@@ -62,8 +62,8 @@ gitsigns.setup({
 		map('n', '<leader>hq', gitsigns.setqflist, "Set Quickfix (Changed Hunks)")
 	
 		-- Toggles
-		map('n', '<leader>tb', gitsigns.toggle_current_line_blame, "Toggle Line Blame")
-		map('n', '<leader>tw', gitsigns.toggle_word_diff, "Toggle Word Diff")
+		map('n', '<leader>htb', gitsigns.toggle_current_line_blame, "Toggle Line Blame")
+		map('n', '<leader>htw', gitsigns.toggle_word_diff, "Toggle Word Diff")
 	
 		-- Text object (Select the current hunk as a text object (e.g., dih to delete the hunk, vih to visually select it).
 		map({'o', 'x'}, 'ih', gitsigns.select_hunk, "Inner Hunk")

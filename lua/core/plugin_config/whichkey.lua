@@ -78,8 +78,9 @@ wk.setup {
   spec = {
     { "<leader>s", group = "[S]earch" },
     { "<leader>l", group = "[L]sp" },
-    { "<leader>b", group = "[B]ookmark"},
+    { "<leader>m", group = "[M]ark (Harpoon)"},
     { "<leader>h", group = "[H]unk (Git)"},
+    { "<leader>c", group = "[C]opilot"}
   },
 }
 

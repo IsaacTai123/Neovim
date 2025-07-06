@@ -127,8 +127,6 @@ require("lazy").setup({
 
   -- Autoformat
   -- { "stevearc/conform.nvim" }
-  
-  -- { "jose-elias-alvarez/typescript.nvim" },
 
   -- WhichKey
   { 
@@ -195,7 +193,6 @@ require("lazy").setup({
   -- Productivity
   { 
     "ThePrimeagen/harpoon",
-    lazy = true,
     config = function()
       require("core.plugin_config.harpoon")
     end,
