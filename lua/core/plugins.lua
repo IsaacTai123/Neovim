@@ -225,51 +225,29 @@ require("lazy").setup({
   -- { "mhinz/vim-startify" },
 
   -- Terminal
-  { "voldikss/vim-floaterm" },
+  -- { "voldikss/vim-floaterm" },
 
   -- Motion Plugins
-  { "easymotion/vim-easymotion" },
+  -- { "easymotion/vim-easymotion" },
   -- { "justinmk/vim-sneak" },
 
   -- Text Editing
-  { "tpope/vim-surround" },
-  { "tpope/vim-commentary" },
-  { "jiangmiao/auto-pairs" },
-  { "airblade/vim-gitgutter" },
-
-  -- Completion
-  { "hrsh7th/nvim-cmp" },
-  { "hrsh7th/cmp-buffer" },
-  { "hrsh7th/cmp-path" },
-  { "hrsh7th/cmp-nvim-lsp" },
-  { "onsails/lspkind.nvim" },
-
-  -- Snippets
-  { "L3MON4D3/LuaSnip" },
-  { "saadparwaiz1/cmp_luasnip" },
-  { "rafamadriz/friendly-snippets" },
-
-  -- GoLang
-  { "fatih/vim-go" },
-
-  -- Productivity
-  { "ThePrimeagen/harpoon" },
-  { "mbbill/undotree" },
-
-  -- TODO Comments
-  { "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+  -- { "tpope/vim-surround" },
+  -- { "tpope/vim-commentary" },
+  -- { "jiangmiao/auto-pairs" },
+  -- { "airblade/vim-gitgutter" },
+  
+  -- { "mbbill/undotree" },
 
   -- Git Tools
-  { "akinsho/git-conflict.nvim" },
-  { "sindrets/diffview.nvim" },
-  { "NeogitOrg/neogit" },
+  -- { "akinsho/git-conflict.nvim" },
+  -- { "sindrets/diffview.nvim" },
+  -- { "NeogitOrg/neogit" },
 
   -- Writing
-  { "Pocco81/true-zen.nvim" },
-
-  -- Copilot
-  { "github/copilot.vim" },
+  -- { "Pocco81/true-zen.nvim" },
 
   -- UI Icons
-  { "echasnovski/mini.icons" },
+  -- { "echasnovski/mini.icons" },
+
 })

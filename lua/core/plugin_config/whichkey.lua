@@ -1,5 +1,3 @@
--- vim.o.timeout = true
--- vim.o.timeoutlen = 300
 local helper = require("core.helper")
 local wk = helper.safe_require("which-key")
 
@@ -79,58 +77,52 @@ wk.setup {
   ---@type wk.Spec
   spec = {
     { "<leader>s", group = "[S]earch" },
+    { "<leader>l", group = "[L]sp" },
+    { "<leader>b", group = "[B]ookmark"},
+    { "<leader>h", group = "[H]unk (Git)"},
   },
 }
 
--- Load neogit 
--- #################################
-local ok, neogit = pcall(require, "neogit")
-if not ok or neogit == nil then
-    return
-    print("Failed to load Neogit")
-end
--- #################################
-
 -- Floaterm group
-wk.add({
-  { "<Space>f", group = "Floaterm" },
-  { "<Space>fc", "<cmd>FloatermNew<cr>", desc = "Create new floaterm" },
-  { "<Space>fn", "<cmd>FloatermNext<cr>", desc = "Next floaterm" },
-  { "<Space>fp", "<cmd>FloatermPrev<cr>", desc = "Previous floaterm" },
-  { "<Space>ff", "<cmd>FloatermFirst<cr>", desc = "First floaterm" },
-  { "<Space>fl", "<cmd>FloatermLast<cr>", desc = "Last floaterm" },
-  { "<Space>fT", "<cmd>FloatermToggle<cr>", desc = "Toggle floaterm window" },
-  { "<Space>fk", "<cmd>FloatermKill<cr>", desc = "Kill floaterm window" },
-  { "<Space>fb", "<cmd>FloatermNew! --height=0.2 --width=0.98 --wintype=normal --name=terminal --position=bottom --autoclose=1 cd %:p:h<cr>", desc = "Create button terminal" },
-  { "<Space>fg", "<cmd>FloatermNew! --height=0.98 --width=0.98 --wintype=float --name=lazygit --position=center --autoclose=1 lazygit<cr>", desc = "lazygit" },
-  { "<Space>ft", "<cmd>FloatermNew! --height=0.98 --width=0.98 --wintype=float --name=lazygit --position=center --autoclose=1 tig<cr>", desc = "tig" },
-  { "<Space>fa", "<cmd>FloatermNew! --height=0.98 --width=0.98 --wintype=float --name=lazygit --position=center --autoclose=1 tig --all<cr>", desc = "tig all reference" }
-})
+-- wk.add({
+--   { "<Space>f", group = "Floaterm" },
+--   { "<Space>fc", "<cmd>FloatermNew<cr>", desc = "Create new floaterm" },
+--   { "<Space>fn", "<cmd>FloatermNext<cr>", desc = "Next floaterm" },
+--   { "<Space>fp", "<cmd>FloatermPrev<cr>", desc = "Previous floaterm" },
+--   { "<Space>ff", "<cmd>FloatermFirst<cr>", desc = "First floaterm" },
+--   { "<Space>fl", "<cmd>FloatermLast<cr>", desc = "Last floaterm" },
+--   { "<Space>fT", "<cmd>FloatermToggle<cr>", desc = "Toggle floaterm window" },
+--   { "<Space>fk", "<cmd>FloatermKill<cr>", desc = "Kill floaterm window" },
+--   { "<Space>fb", "<cmd>FloatermNew! --height=0.2 --width=0.98 --wintype=normal --name=terminal --position=bottom --autoclose=1 cd %:p:h<cr>", desc = "Create button terminal" },
+--   { "<Space>fg", "<cmd>FloatermNew! --height=0.98 --width=0.98 --wintype=float --name=lazygit --position=center --autoclose=1 lazygit<cr>", desc = "lazygit" },
+--   { "<Space>ft", "<cmd>FloatermNew! --height=0.98 --width=0.98 --wintype=float --name=lazygit --position=center --autoclose=1 tig<cr>", desc = "tig" },
+--   { "<Space>fa", "<cmd>FloatermNew! --height=0.98 --width=0.98 --wintype=float --name=lazygit --position=center --autoclose=1 tig --all<cr>", desc = "tig all reference" }
+-- })
 
 
 -- True-zen group
-wk.add({
-  { "<Space>z", group = "True-zen" },
-  { "<Space>zn", function() local first = 1 local last = vim.api.nvim_buf_line_count(0) GlobTruezen.narrow(first, last) end, desc = "Narrow mode" },
-  { "<Space>zf", function() GlobTruezen.focus() end, desc = "Focus mode" },
-  { "<Space>zm", function() GlobTruezen.minimalist() end, desc = "Minimal mode" },
-  { "<Space>za", function() GlobTruezen.ataraxis() end, desc = "Ataraxis mode" },
-  { "<Space>zt", ":TZQuit<CR>", desc = "Exit Zen mode" },
-})
+-- wk.add({
+--   { "<Space>z", group = "True-zen" },
+--   { "<Space>zn", function() local first = 1 local last = vim.api.nvim_buf_line_count(0) GlobTruezen.narrow(first, last) end, desc = "Narrow mode" },
+--   { "<Space>zf", function() GlobTruezen.focus() end, desc = "Focus mode" },
+--   { "<Space>zm", function() GlobTruezen.minimalist() end, desc = "Minimal mode" },
+--   { "<Space>za", function() GlobTruezen.ataraxis() end, desc = "Ataraxis mode" },
+--   { "<Space>zt", ":TZQuit<CR>", desc = "Exit Zen mode" },
+-- })
 
 -- System group
-wk.add({
-  { "<Space>s", group = "System" },
-  { "<Space>sj", ":horizontal resize -2<cr>", desc = "Decrease the height" },
-  { "<Space>sk", ":horizontal resize +2<cr>", desc = "Increase the height" },
-  { "<Space>sh", ":vertical resize -2<cr>", desc = "Expand the weight to left" },
-  { "<Space>sl", ":vertical resize +2<cr>", desc = "Shrink the weight to right" },
-  { "<Space>sb", ":bufdo bw!<cr>", desc = "Close all buffer without saving it" },
-  { "<Space>sn", ":tabnext<cr>", desc = "Switch to next tab" },
-  { "<Space>sp", ":tabprevious<cr>", desc = "Switch to prev tab" },
-  { "<Space>sc", ":tabnew<cr>", desc = "Create a new tab" },
-  { "<Space>ss", ":sp<cr>", desc = "Split window horizontal" },
-})
+-- wk.add({
+--   { "<Space>o", group = "Operation System" },
+--   { "<Space>oj", ":horizontal resize -2<cr>", desc = "Decrease the height" },
+--   { "<Space>ok", ":horizontal resize +2<cr>", desc = "Increase the height" },
+--   { "<Space>oh", ":vertical resize -2<cr>", desc = "Expand the weight to left" },
+--   { "<Space>ol", ":vertical resize +2<cr>", desc = "Shrink the weight to right" },
+--   { "<Space>ob", ":bufdo bw!<cr>", desc = "Close all buffer without saving it" },
+--   { "<Space>on", ":tabnext<cr>", desc = "Switch to next tab" },
+--   { "<Space>op", ":tabprevious<cr>", desc = "Switch to prev tab" },
+--   { "<Space>oc", ":tabnew<cr>", desc = "Create a new tab" },
+--   { "<Space>os", ":sp<cr>", desc = "Split window horizontal" },
+-- })
 
 -- LSP group
 -- wk.add({
@@ -164,67 +156,67 @@ wk.add({
 --   { "<Space>lD", "<cmd>lua require('telescope.builtin').lsp_document_symbols<cr>", desc = "Document Symbols" },
 -- })
 
--- Gitgutter group
-wk.add({
-  { "<Space>g", group = "Gitgutter" },
-  { "<Space>gn", "<cmd>GitGutterNextHunk<cr>", desc = "Next hunk" },
-  { "<Space>gp", "<cmd>GitGutterPrevHunk<cr>", desc = "Prev hunk" },
-  { "<Space>gq", "<cmd>GitGutterQuickFix<cr>", desc = "Quickfix" },
-  { "<Space>gd", "<cmd>GitGutterDiffOrig<cr>", desc = "Diff" },
-  { "<Space>gf", "<cmd>GitGutterFold<cr>", desc = "Fold" },
-  { "<Space>gh", "<cmd>GitGutterLineHighlightsToggle<cr>", desc = "Toggle Highlight" },
-  { "<Space>ge", "<cmd>GitGutterLineNrHighlightsToggle<cr>", desc = "Toggle Number Highlight" },
-  { "<Space>gH", "<cmd>GitGutterStageHunk<cr>", desc = "Stage Hunk" },
-  { "<Space>gU", "<cmd>GitGutterUndoHunk<cr>", desc = "Undo Hunk" },
-  { "<Space>gP", "<cmd>GitGutterPreviewHunk<cr>", desc = "Preview Hunk" },
-  { "<Space>gs", "<cmd>GitGutterAll<cr>", desc = "Update signs across all buffer" },
-  { "<Space>gE", "<cmd>GitGutterBufferEnable<cr>", desc = "Buffer enable" },
-  { "<Space>gt", "<cmd>GitGutterBufferToggle<cr>", desc = "Buffer toggle" },
-})
+-- -- Gitgutter group
+-- wk.add({
+--   { "<Space>g", group = "Gitgutter" },
+--   { "<Space>gn", "<cmd>GitGutterNextHunk<cr>", desc = "Next hunk" },
+--   { "<Space>gp", "<cmd>GitGutterPrevHunk<cr>", desc = "Prev hunk" },
+--   { "<Space>gq", "<cmd>GitGutterQuickFix<cr>", desc = "Quickfix" },
+--   { "<Space>gd", "<cmd>GitGutterDiffOrig<cr>", desc = "Diff" },
+--   { "<Space>gf", "<cmd>GitGutterFold<cr>", desc = "Fold" },
+--   { "<Space>gh", "<cmd>GitGutterLineHighlightsToggle<cr>", desc = "Toggle Highlight" },
+--   { "<Space>ge", "<cmd>GitGutterLineNrHighlightsToggle<cr>", desc = "Toggle Number Highlight" },
+--   { "<Space>gH", "<cmd>GitGutterStageHunk<cr>", desc = "Stage Hunk" },
+--   { "<Space>gU", "<cmd>GitGutterUndoHunk<cr>", desc = "Undo Hunk" },
+--   { "<Space>gP", "<cmd>GitGutterPreviewHunk<cr>", desc = "Preview Hunk" },
+--   { "<Space>gs", "<cmd>GitGutterAll<cr>", desc = "Update signs across all buffer" },
+--   { "<Space>gE", "<cmd>GitGutterBufferEnable<cr>", desc = "Buffer enable" },
+--   { "<Space>gt", "<cmd>GitGutterBufferToggle<cr>", desc = "Buffer toggle" },
+-- })
 
 -- Neogit group
-wk.add({
-    { "<Space>n", group = "Neogit" },
-  { "<Space>no", function() neogit.open() end, desc = "Open Neogit" },
-    { "<Space>nc", function() neogit.open({ "commit" }) end, desc = "Open Neogit commit window" },
-    { "<Space>nh", function() neogit.open({ kind = "split" }) end, desc = "Open horizontal" },
-    { "<Space>nv", function() neogit.open({ kind = "vsplit" }) end, desc = "Open vertical" },
-    { "<Space>nt", function() neogit.open({ kind = "tab" }) end, desc = "Open in tab" },
-    { "<Space>ny", function() neogit.open({ cwd = "~/.config/nvim/" }) end, desc = "Open nvim git repo" },
-})
+-- wk.add({
+--     { "<Space>n", group = "Neogit" },
+--   { "<Space>no", function() neogit.open() end, desc = "Open Neogit" },
+--     { "<Space>nc", function() neogit.open({ "commit" }) end, desc = "Open Neogit commit window" },
+--     { "<Space>nh", function() neogit.open({ kind = "split" }) end, desc = "Open horizontal" },
+--     { "<Space>nv", function() neogit.open({ kind = "vsplit" }) end, desc = "Open vertical" },
+--     { "<Space>nt", function() neogit.open({ kind = "tab" }) end, desc = "Open in tab" },
+--     { "<Space>ny", function() neogit.open({ cwd = "~/.config/nvim/" }) end, desc = "Open nvim git repo" },
+-- })
 
 -- Conflict group
-wk.add({
-  { "<Space>c", group = "Conflict" },
-  { "<Space>ca", "<cmd>GitConflictChooseBoth<cr>", desc = "Choose both" },
-  { "<Space>cb", "<cmd>GitConflictChooseBase<cr>", desc = "Choose base" },
-  { "<Space>cx", "<cmd>GitConflictChooseNone<cr>", desc = "Choose none" },
-  { "<Space>co", "<cmd>GitConflictChooseOurs<cr>", desc = "Choose ours" },
-  { "<Space>ct", "<cmd>GitConflictChooseTheirs<cr>", desc = "Choose theirs" },
-  { "<Space>cn", "<cmd>GitConflictNextConflict<cr>", desc = "Next conflict" },
-  { "<Space>cp", "<cmd>GitConflictPrevConflict<cr>", desc = "Prev conflict" },
-  { "<Space>cl", "<cmd>GitConflictListQf<cr>", desc = "List conflict" },
-  { "<Space>cr", "<cmd>GitConflictRefresh<cr>", desc = "Conflict refresh" },
-})
+-- wk.add({
+--   { "<Space>c", group = "Conflict" },
+--   { "<Space>ca", "<cmd>GitConflictChooseBoth<cr>", desc = "Choose both" },
+--   { "<Space>cb", "<cmd>GitConflictChooseBase<cr>", desc = "Choose base" },
+--   { "<Space>cx", "<cmd>GitConflictChooseNone<cr>", desc = "Choose none" },
+--   { "<Space>co", "<cmd>GitConflictChooseOurs<cr>", desc = "Choose ours" },
+--   { "<Space>ct", "<cmd>GitConflictChooseTheirs<cr>", desc = "Choose theirs" },
+--   { "<Space>cn", "<cmd>GitConflictNextConflict<cr>", desc = "Next conflict" },
+--   { "<Space>cp", "<cmd>GitConflictPrevConflict<cr>", desc = "Prev conflict" },
+--   { "<Space>cl", "<cmd>GitConflictListQf<cr>", desc = "List conflict" },
+--   { "<Space>cr", "<cmd>GitConflictRefresh<cr>", desc = "Conflict refresh" },
+-- })
 
 -- DiffView group
-wk.add({
-  { "<Space>d", group = "DiffView" },
-  { "<Space>dc", "<cmd>DiffviewClose<cr>", desc = "Close Diffview" },
-  { "<Space>dh", "<cmd>DiffviewFileHistory<cr>", desc = "History Current branch" },
-  { "<Space>df", "<cmd>DiffviewFileHistory %<cr>", desc = "History Current file" },
-  { "<Space>do", "<cmd>DiffviewOpen<cr>", desc = "Diffview with current index" },
-  { "<Space>da", "<cmd>DiffviewOpen HEAD~1<cr>", desc = "Diffview HEAD~1" },
-  { "<Space>db", "<cmd>DiffviewOpen HEAD~2<cr>", desc = "Diffview HEAD~2" },
-  { "<Space>dt", "<cmd>DiffviewToggleFiles<cr>", desc = "Diffview Toggle file" },
-  { "<Space>dr", "<cmd>DiffviewRefresh<cr>", desc = "Diffview Refresh" },
-})
+-- wk.add({
+--   { "<Space>d", group = "DiffView" },
+--   { "<Space>dc", "<cmd>DiffviewClose<cr>", desc = "Close Diffview" },
+--   { "<Space>dh", "<cmd>DiffviewFileHistory<cr>", desc = "History Current branch" },
+--   { "<Space>df", "<cmd>DiffviewFileHistory %<cr>", desc = "History Current file" },
+--   { "<Space>do", "<cmd>DiffviewOpen<cr>", desc = "Diffview with current index" },
+--   { "<Space>da", "<cmd>DiffviewOpen HEAD~1<cr>", desc = "Diffview HEAD~1" },
+--   { "<Space>db", "<cmd>DiffviewOpen HEAD~2<cr>", desc = "Diffview HEAD~2" },
+--   { "<Space>dt", "<cmd>DiffviewToggleFiles<cr>", desc = "Diffview Toggle file" },
+--   { "<Space>dr", "<cmd>DiffviewRefresh<cr>", desc = "Diffview Refresh" },
+-- })
 
 -- Others group
-wk.add({
-  { "<Space>o", group = "Others" },
-  { "<Space>oe", "<cmd>ConvertToDecimal<cr><cr>", desc = "Convert whole page to Decimal" },
-  { "<Space>ou", "<cmd>UndotreeToggle<cr>", desc = "Undo tree" },
-  { "<Space>ol", "<cmd>set relativenumber!<cr>", desc = "Toggle Relativenumber" },
-  { "<Space>on", "<cmd>set number!<cr>", desc = "Toggle Line Number" }
-})
+-- wk.add({
+--   { "<Space>o", group = "Others" },
+--   { "<Space>oe", "<cmd>ConvertToDecimal<cr><cr>", desc = "Convert whole page to Decimal" },
+--   { "<Space>ou", "<cmd>UndotreeToggle<cr>", desc = "Undo tree" },
+--   { "<Space>ol", "<cmd>set relativenumber!<cr>", desc = "Toggle Relativenumber" },
+--   { "<Space>on", "<cmd>set number!<cr>", desc = "Toggle Line Number" }
+-- })
