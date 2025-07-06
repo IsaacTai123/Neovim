@@ -162,11 +162,20 @@ require("lazy").setup({
       require("core.plugin_config.mini")
     end,
   },
+
+  -- Highlight, edit, and navigate code
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+    config = function()
+      require("core.plugin_config.treesitter")
+    end,
+  },
+
   -- File Explorer
   { "nvim-tree/nvim-tree.lua" },
 
-  -- Syntax and Treesitter
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
   
   -- UI Enhancements
