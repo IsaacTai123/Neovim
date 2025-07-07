@@ -80,7 +80,8 @@ wk.setup {
     { "<leader>l", group = "[L]sp" },
     { "<leader>m", group = "[M]ark (Harpoon)"},
     { "<leader>h", group = "[H]unk (Git)"},
-    { "<leader>c", group = "[C]opilot"}
+    { "<leader>c", group = "[C]opilot"},
+    { "<leader>t", group = "[T]oggle Term"},
   },
 }
 

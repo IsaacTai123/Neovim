@@ -177,7 +177,7 @@ require("lazy").setup({
     branch = "v3.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      -- "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
       -- Optional image support for file preview: See `# Preview Mode` for more information.
       -- {"3rd/image.nvim", opts = {}},
@@ -213,7 +213,14 @@ require("lazy").setup({
     config = function()
       require("core.plugin_config.gitsigns")
     end,
-  }
+  },
+
+  -- Quickly switch between terminals
+  {
+    'akinsho/toggleterm.nvim', version = "*", config = function ()
+      require("core.plugin_config.toggleterm")
+    end
+  },
 
   -- UI Enhancements
   -- { "bluz71/vim-nightfly-guicolors" },
