@@ -3,7 +3,7 @@ local indent_augroup = vim.api.nvim_create_augroup("MyIndentRules", { clear = tr
 
 vim.api.nvim_create_autocmd("FileType", {
 	group = indent_augroup,
-	pattern = { "python", "javascript", "typescript", "json", "yaml", "html", "css" },
+	pattern = { "python", "javascript", "typescript", "json", "yaml", "html", "css", "lua" },
 	callback = function()
 		vim.opt_local.tabstop = 2
 		vim.opt_local.shiftwidth = 2

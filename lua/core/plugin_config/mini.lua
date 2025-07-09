@@ -2,6 +2,7 @@ local helper = require("core.helper")
 local mini_ai = helper.safe_require("mini.ai")
 local mini_surround = helper.safe_require("mini.surround")
 local mini_statusline = helper.safe_require("mini.statusline")
+local mini_pairs = helper.safe_require("mini.pairs")
 
 -- Most of the config down bellow are default settings
 
@@ -55,5 +56,8 @@ mini_surround.setup({
 
 -- Simple and easy statusline
 mini_statusline.setup({
-	use_icons = vim.g.have_nerd_font
+	use_icons = vim.g.have_nerd_font,
 })
+
+-- Lightweight tool compare to nvim-autopairs
+mini_pairs.setup()
